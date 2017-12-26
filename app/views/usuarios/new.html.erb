@@ -1,0 +1,53 @@
+<div class="center jumbotron">
+
+<h1>Cadastro novo usuário</h1>
+
+<%= form_for :usuario, url: usuarios_path do |f| %>
+
+<% if @usuario.errors.any? %>
+<div id="error_explanation">
+
+  <div class="alert alert-danger">
+    O formulário contém <%= pluralize(@usuario.errors.count, "erro") %>.
+  </div>
+  <ul>
+    <% @usuario.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<p>
+  <%= f.label :nome %><br>
+  <%= f.text_field :nome %>
+</p>
+
+<p>
+  <%= f.label :email, "E-mail" %><br>
+  <%= f.text_field :email %>
+</p>
+
+<p>
+  <%= f.label :password, "Senha" %><br>
+  <%= f.password_field :password %>
+</p>
+
+<p>
+  <%= f.label :password_confirmation, "Confirmação" %><br>
+  <%= f.password_field :password_confirmation %>
+</p>
+
+<p>
+  <%= f.label :tipo %><br>
+  <%= f.select :tipo, ['Administrador', 'Usuário'] %>
+</p>
+
+<p>
+  <%= f.submit  "Cadastrar", class: "btn btn-primary" %>
+</p>
+<% end %>
+
+<%= link_to 'Voltar', usuarios_path %>
+
+</div>

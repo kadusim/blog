@@ -1,0 +1,60 @@
+<header class="navbar navbar-inverse">
+
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="navbar-brand" href="/">HOME</a>
+
+      <% if logged_in? %>
+        <p class="navbar-text">Bem-vindo, <%= current_user.nome %></p>
+      <% end %>
+
+    </div>
+    
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+
+        <% if logged_in? %>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <b class="caret"></b>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><%= link_to "Posts", posts_path %></li>
+            <li><%= link_to "Perfil", current_user %></li>
+            <li><%= link_to "Manutenção", usuarios_path %></li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to "Log out", logout_path, method: :delete %>
+            </li>
+          </ul>
+        </li>
+
+        <% else %>
+        <li><%= link_to "Log in", login_path %></li>
+        <% end %>
+
+      </ul>
+    </div>
+
+  </div>
+
+</header>
+
+  <!-- Navigation bar with social media icons -->
+<div class="w3-bar w3-black w3-hide-small">
+  <a href="https://www.facebook.com/celia.colona" class="w3-bar-item w3-button"><i class="fa fa-facebook-official"></i></a>
+  <a href="https://www.instagram.com/celiacolona/" class="w3-bar-item w3-button"><i class="fa fa-instagram"></i></a>
+  <a href="https://br.pinterest.com/celiacolona/" class="w3-bar-item w3-button"><i class="fa fa-pinterest"></i></a>
+  <a href="https://www.linkedin.com/in/c%C3%A9lia-colona-6476bb72/" class="w3-bar-item w3-button"><i class="fa fa-linkedin"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-right"><i class="fa fa-search"></i></a>
+</div>

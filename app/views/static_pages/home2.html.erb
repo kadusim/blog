@@ -1,0 +1,41 @@
+<div class="jumbotron jumbotron-index">
+
+	<% listar_posts %>
+	<% @posts.each do |post| %>
+
+		<h4><%= post.titulo %></h4>
+		<h5><%= post.created_at.strftime("Postado em %d-%m-%Y, as %H:%M") %></h5>
+
+		<div class="row row-post">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<p> <%= post.conteudo %> </p>		
+
+			</div>
+		</div>
+
+		<h3>Comentarios</h3>
+		<% post.comentarios.each do |comentario| %>
+			<hr />
+			<p> <%= comentario.autor %> </p>
+			<p> <%= comentario.conteudo %> </p>
+		<% end %>
+
+		<h3>Adicione um comentario:</h3>
+		
+		<%= form_for [post, Comentario.new], :remote => true do |f| %>
+		  <div class="field">
+		    <%= f.label :autor %><br />
+		    <%= f.text_field :autor %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :conteudo %><br />
+		    <%= f.text_area :conteudo %>
+		  </div>
+		  <div class="actions">
+		    <%= f.submit %>
+		  </div>
+		<% end %>
+
+	<% end %>
+
+</div>

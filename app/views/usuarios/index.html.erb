@@ -1,0 +1,27 @@
+<div class="center jumbotron">
+
+<h1>Usuários cadastrados</h1>
+ 
+<table>
+  <tr>
+    <th>Usuário</th>
+    <th>Tipo</th>
+  </tr>
+ 
+  <% @usuarios.each do |usuario| %>
+    <tr>
+      <td><%= usuario.nome %></td>
+      <td><%= usuario.email %></td>
+      <td><%= usuario.tipo %></td>
+      <td><%= link_to 'Detalhes', usuario_path(usuario) %></td>
+      <td><%= link_to 'Editar', edit_usuario_path(usuario) %></td>
+      <td><%= link_to 'Excluir', usuario_path(usuario),
+              method: :delete,
+              data: { confirm: 'Deseja excluir?' } %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Novo usuário', new_usuario_path %>
+
+</div>  

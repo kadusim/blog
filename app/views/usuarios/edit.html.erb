@@ -1,0 +1,53 @@
+<div class="center jumbotron">
+
+  <h1>Editar usuário</h1>
+
+  <%= form_for(@usuario) do |f| %>
+
+  <% if @usuario.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <%= pluralize(@usuario.errors.count, "error") %> prohibited
+      this usuario from being saved:
+    </h2>
+    <ul>
+      <% @usuario.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <p>
+    <%= f.label :nome %><br>
+    <%= f.text_field :nome %>
+  </p>
+
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </p>
+
+  <p>
+    <%= f.label :password_confirmation %><br>
+    <%= f.text_field :password_confirmation %>
+  </p>
+
+  <p>
+    <%= f.label :tipo %><br>
+    <%= f.select :tipo, ['Administrador', 'Usuário'] %>
+  </p>
+
+  <p>
+    <%= f.submit "Alterar", class: "btn btn-primary" %>
+  </p>
+  <% end %>
+
+  <%= link_to 'Voltar', usuarios_path %>
+
+</div>

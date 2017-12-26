@@ -1,0 +1,133 @@
+<!-- w3-content defines a container for fixed size centered content, 
+	and is wrapped around the whole page content, except for the footer in this example -->
+	<div class="w3-content" style="max-width:1600px">
+
+		<!-- Header -->
+		<header class="w3-container w3-center w3-padding-48 w3-white">
+			<h6>Bem-vindo ao </h6>
+			<h1 class="w3-xxxlarge"><b>NALUA</b></h1>
+		</header>
+
+		<!-- Image header -->
+		<header class="w3-display-container w3-wide" id="home">
+			<%= image_tag 'nalua.png', class: 'w3-image', height: '1060', width: '1600' %>
+			<div class="w3-display-left w3-padding-large">
+				<h1 class="w3-text-white">Good vibes only</h1>
+				<h1 class="w3-jumbo w3-text-white w3-hide-small"><b>NALUA</b></h1>
+			</div>
+		</header>
+
+		<!-- Grid -->
+		<div class="w3-row w3-padding w3-border">
+
+			<!-- Blog entries -->
+			<div class="w3-col l8 s12" id="posts">
+
+				<% listar_posts %>
+				<% @posts.each do |post| %>
+				<!-- Blog entry -->
+
+				<div class="w3-container w3-white w3-margin w3-padding-large">
+					<div class="w3-center">
+						<h3><%= post.titulo %></h3>
+						<h5>Célia, <span class="w3-opacity"><%= post.created_at.strftime(" em %d-%m-%Y, as %H:%M") %></span></h5>
+					</div>
+
+					<div class="w3-justify">
+						<!--<img src="#" alt="Men in Hats" style="width:100%" class="w3-padding-16">-->
+						<%= link_to (image_tag post.foto.url(:medium), class: 'w3-padding-16', width: '100%'), detalhe_post_path(post) %>
+						<p> <%= post.conteudo %> </p>
+						<p class="w3-right">
+							<button class="w3-button w3-black" onclick="myFunction('demo<%= post.id %>')">
+								<b>Comentários </b>
+								<span class="fb-comments-count w3-tag w3-white" data-href="https://developers.facebook.com/docs/plugins/comments#nalua#<%= post.id %>"></span>
+							</button>
+						</p>
+						<p class="w3-clear"></p>
+
+						<!-- Comentários do facebook -->
+						<div id="demo<%= post.id %>" style="display:none">
+							<div class="fb-comments width: 100%" data-href="https://developers.facebook.com/docs/plugins/comments#nalua#<%= post.id %>" data-numposts="5"></div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- END BLOG ENTRIES -->
+				<% end %>
+
+				<nav aria-label="...">
+					<ul class="pager">
+						<li><%= link_to_prev_page @posts, 'Anterior', :onclick => "javascript: window.location.reload()", 
+						class: 'w3-black', :params => { :anchor => 'posts' } %></li>
+						<li><%= link_to_next_page @posts, 'Próxima', :onclick => "javascript: window.location.reload()", 
+						class: 'w3-black', :params => { :anchor => 'posts' } %></li>
+					</ul>
+				</nav>
+
+			</div>
+
+			<!-- About/Information menu -->
+			<div class="w3-col l4">
+				<!-- About Card -->
+				<div class="w3-white w3-margin">
+					
+					<%= image_tag 'nascimento.png', class: 'w3-grayscale', width: '100%' %>
+					<div class="w3-container w3-black">
+						<h4>Os escritores</h4>
+						<p>Célia, enfermeira, Mãe e esposa dedicada. Kadu, analista de sistema, apaixonado por tecnologia, quando a Célia permite, arrisca andar de skate e por fim porém não menos importante, Nalu, por enquanto apenas enche de amor a vida do casal.</p>
+					</div>
+				</div>
+				<hr>
+
+				<!-- Posts -->
+				<div class="w3-white w3-margin">
+					<div class="w3-container w3-padding w3-black">
+						<h4>Destaques</h4>
+					</div>
+					<ul class="w3-ul w3-hoverable w3-white">
+						<% @posts_destaques = listar_destaques %>
+						<% @posts_destaques.each do |post_destaque| %>
+						<li class="w3-padding-16">
+							<%= image_tag post_destaque.foto.url(:thumb), class: 'w3-left w3-margin-right', width: '50px' %>
+							<span class="w3-large"><%= post_destaque.titulo %></span>
+							<br>
+							<span><%= post_destaque.conteudo %></span>
+						</li>
+						<% end %>
+					</ul>
+				</div>
+				<hr>
+
+				<!-- END About/Intro Menu -->
+			</div>
+
+			<!-- END GRID -->
+		</div>
+
+		<!-- END w3-content -->
+	</div>
+
+	<script>
+// Toggle between hiding and showing blog replies/comments
+function myFunction(id) {
+	var x = document.getElementById(id);
+	if (x.className.indexOf("w3-show") == -1) {
+		x.className += " w3-show";
+	} else { 
+		x.className = x.className.replace(" w3-show", "");
+	}
+}
+</script>
+
+
+<script>
+// plugin do facebook
+(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.10";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
